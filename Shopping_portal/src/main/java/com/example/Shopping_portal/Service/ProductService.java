@@ -2,21 +2,26 @@ package com.example.Shopping_portal.Service;
 
 import com.example.Shopping_portal.Dto.RequestDto.ProductRequestDto;
 import com.example.Shopping_portal.Dto.ResponseDto.ProductResponseDto;
+import com.example.Shopping_portal.Enum.ProductCategory;
 import com.example.Shopping_portal.Enum.ProductStatus;
 import com.example.Shopping_portal.Exceptions.SellerNotFoundException;
 import com.example.Shopping_portal.Model.Product;
 import com.example.Shopping_portal.Model.Seller;
+import com.example.Shopping_portal.Repository.ProductRepository;
 import com.example.Shopping_portal.Repository.SellerRepository;
 import com.example.Shopping_portal.Transformer.ProductTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ProductService {
     @Autowired
     SellerRepository sellerRepository;
+    @Autowired
+    ProductRepository productRepository;
     public ProductResponseDto addProduct(ProductRequestDto productRequestDto){
 
         // check if seller exisit
@@ -34,5 +39,16 @@ public class ProductService {
         List<Product> products = savedSeller.getProducts();
         Product latestProduct = products.get(products.size()-1);
         return  ProductTransformer.productToproductresponseDto(latestProduct);
+    }
+
+    public List<ProductResponseDto> getProdByCategoryAndPriceGreaterThan(int price, ProductCategory category) {
+
+        List<Product> products = productRepository.getProdByCategoryAndPriceGreaterThan(price,category);
+
+        List<ProductResponseDto> ans = new ArrayList<>();
+        for(Product product : products){
+            ans.add(ProductTransformer.productToproductresponseDto(product));
+        }
+        return ans;
     }
 }
