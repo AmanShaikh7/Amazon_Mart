@@ -1,2 +1,8 @@
-package com.example.Shopping_portal.Repository;public interface ItemRepository {
+package com.example.Shopping_portal.Repository;
+
+import com.example.Shopping_portal.Model.Item;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ItemRepository extends JpaRepository<Item , Integer> {
+
 }
