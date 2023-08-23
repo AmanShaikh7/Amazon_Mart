@@ -6,9 +6,9 @@ import com.example.Shopping_portal.Model.Item;
 
 public class ItemTransformer {
 
-    public static Item itemRequestDtoToItem(ItemRequestDto itemRequestDto){
+    public static Item itemRequestDtoToItem(int reqQuantity){
         return Item.builder()
-                .requiredQuantity(itemRequestDto.getRequiredQuantity())
+                .requiredQuantity(reqQuantity)
                 .build();
     }
     public static ItemResponseDto ItemToItemResponseDto(Item item){

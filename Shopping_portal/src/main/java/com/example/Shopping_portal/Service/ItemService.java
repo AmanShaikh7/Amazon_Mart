@@ -32,7 +32,7 @@ public class ItemService {
 
         if(product.getAvailableQuantity() < itemRequestDto.getRequiredQuantity()) throw new LessQuantityAvailableException("reduce the number of quantity");
 
-        Item item = ItemTransformer.itemRequestDtoToItem(itemRequestDto);
+        Item item = ItemTransformer.itemRequestDtoToItem(itemRequestDto.getRequiredQuantity());
        // item.setProduct(product); ///
         return item;
     }

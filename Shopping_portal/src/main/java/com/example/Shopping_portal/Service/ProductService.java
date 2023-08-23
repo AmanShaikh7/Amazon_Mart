@@ -51,4 +51,13 @@ public class ProductService {
         }
         return ans;
     }
+
+    public List<ProductResponseDto> top5cheapestProduct(ProductCategory category) {
+        List<Product> filteredProducts = productRepository.findTop5ByCategoryOrderByPriceAsc(category);
+        List<ProductResponseDto> reponseList = new ArrayList<>();
+        for(Product p : filteredProducts){
+            reponseList.add(ProductTransformer.productToproductresponseDto(p));
+        }
+        return reponseList;
+    }
 }

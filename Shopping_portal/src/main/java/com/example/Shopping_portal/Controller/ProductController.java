@@ -32,4 +32,11 @@ public class ProductController {
         List<ProductResponseDto> productResponseDtoList = productService.getProdByCategoryAndPriceGreaterThan(price,category);
         return new ResponseEntity(productResponseDtoList,HttpStatus.OK);
     }
+
+    // get 5 cheapest product in category
+    @GetMapping("top_5_cheapest_Product_in_category")
+    public ResponseEntity top5cheapestProduct(ProductCategory category){
+        List<ProductResponseDto> responeList = productService.top5cheapestProduct(category);
+        return new ResponseEntity(responeList,HttpStatus.OK);
+    }
 }
